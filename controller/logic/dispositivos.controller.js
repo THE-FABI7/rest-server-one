@@ -35,7 +35,7 @@ exports.updatedispositivo = (req, res, next) => {
     nombre: req.body.nombre,
     tipo: req.body.tipo,
     marca: req.body.marca,
-    valor: req.body.año_lanzamiento,
+    valor: req.body.valor,
     actualizacion: req.body.actualizacion,
     precio: req.body.precio,
   };
@@ -81,7 +81,7 @@ exports.getbyMarca = (req, res, next) => {
 };
 /**Allows to delete one register from the db */
 exports.deletePhone = () => {
-  dispositivosDto.delete({ _ip: req.params.ip }, dispositivo, (err) => {
+  dispositivosDto.delete({ _nombre: req.params.nombre }, dispositivo, (err) => {
     if (err) {
       return res.status(400).json({
         error: err,
