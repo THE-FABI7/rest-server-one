@@ -1,14 +1,11 @@
 {
-    
-    "db_connections":{
-      "mongodb":{
-        "host":"tallerprog3.7h2ert5.mongodb.net",
-        "user":"fabian1701927053",
-        "password":"RQkm4M3j2IwaCkSf",
-        "dbname": "TallerProgamacion"
-      }
-    },
-    "server-port": 3000
-
-
+  "db_connections": {
+    "mongodb": {
+      "host": "tallerprog3.7h2ert5.mongodb.net",
+      "user": "fabian1701927053",
+      "password": "RQkm4M3j2IwaCkSf",
+      "dbname": "TallerProgamacion"
+    }
+  },
+  "server-port": 3000
 }
