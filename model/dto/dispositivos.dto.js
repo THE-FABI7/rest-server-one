@@ -25,5 +25,5 @@ schema.statics = {
     }
 }
 
-const dto = mongoose.model('coll_phones', schema);
+const dto = mongoose.model('coll_dispositivos', schema);
 module.exports = dto;
