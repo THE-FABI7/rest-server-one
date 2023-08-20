@@ -2,10 +2,8 @@
 const mongoose = require("mongoose");
 const config = require("config");
 
-//user : fabian1701927053
-//pasword: RQkm4M3j2IwaCkSf
-
 const mongodbInfo = config.get("db_connections.mongodb");
+
 
 const conectionStrin = `mongodb+srv://${mongodbInfo.user}:${mongodbInfo.password}@${mongodbInfo.host}/${mongodbInfo.dbname}?retryWrites=true&w=majority`;
 
@@ -15,7 +13,7 @@ module.exports = () => {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     // useCreateIndex: true,
-    // useFindAndModify: false,
+    // useFindAndModify: false, 
   });
 
   mongoose.connection.on("connected", () => {

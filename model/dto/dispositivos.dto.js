@@ -1,12 +1,13 @@
 // packes
 const mongoose = require('mongoose');
-const db = require("../db-connection/mongodb")
+const db = require('../db/mongodb')
 
 const schema = require("../schemas/dispositivos")
 
 db();
 /**Declares the data managemet functions */
 schema.statics = {
+
     create: function (data, callback) {
         let doc =  new this(data);
         doc.save(callback);

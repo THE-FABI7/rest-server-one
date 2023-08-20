@@ -1,6 +1,7 @@
 // const { default: mongoose } = require("mongoose");
 const mongoose = require("mongoose");
-const validator = require("mongose-unique-validator");
+const uniqueValidator = require("mongoose-unique-validator");
+
 
 const dispostivosSchema = mongoose.Schema({
   nombre: {
@@ -33,5 +34,5 @@ const dispostivosSchema = mongoose.Schema({
   },
 });
 
-dispostivosSchema.plugin(validator);
+dispostivosSchema.plugin(uniqueValidator);
 module.exports = dispostivosSchema;
