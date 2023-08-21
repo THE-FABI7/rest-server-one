@@ -14,7 +14,7 @@ module.exports = (app) =>{
         controller.updatedispositivo(req, res, next)}
     )
 
-    app.delete("/dispositivos", (req, res, next) =>{
+    app.delete("/dispositivos/:nombre", (req, res, next) =>{
         controller.deleteDispositivo(req, res, next)}
     )
 

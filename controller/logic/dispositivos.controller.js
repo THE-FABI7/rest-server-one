@@ -1,90 +1,85 @@
-// dto
 const dispositivosDto = require("../../model/dto/dispositivos.dto");
 
-exports.createdispositivo = (req, res, next) => {
- /* El código está creando un objeto llamado `dispositivo` con las propiedades `nombre`, `tipo`,
- `marca`, `valor`, `actualización` y `precio`. Los valores de estas propiedades se asignan desde el
- objeto `req.body`, que es el cuerpo de la solicitud enviada por el cliente. Este código
- generalmente se usa en una función de controlador de ruta para extraer los datos relevantes del
- cuerpo de la solicitud y almacenarlos en un objeto para su posterior procesamiento o las
- operaciones de la base de datos. */
-  let dispositivo = {
-    nombre: req.body.nombre,
-    tipo: req.body.tipo,
-    marca: req.body.marca,
-    actualizacion: req.body.actualizacion,
-    precio: req.body.precio,
-  };
+exports.createdispositivo = async (req, res, next) => {
+  try {
+    const dispositivoData = {
+      nombre: req.body.nombre,
+      tipo: req.body.tipo,
+      marca: req.body.marca,
+      actualizacion: req.body.actualizacion,
+      precio: req.body.precio,
+    };
 
-  dispositivosDto.create(dispositivo, (err, data) => {
-    if (err) {
-      return res.status(400).json({
-        error: err,
-      });
-    }
+    const nuevoDispositivo = await dispositivosDto.create(dispositivoData);
     return res.status(201).json({
-      info: data,
+      info: nuevoDispositivo,
     });
-  });
+  } catch (error) {
+    return res.status(400).json({
+      error: error.message, // Captura el mensaje de error
+    });
+  }
 };
-/* La función `exports.updatedispositivo` es una función de controlador que maneja la operación de
-actualización de un "dispositivo" (dispositivo) en la base de datos. */
-exports.updatedispositivo = (req, res, next) => {
-  let dispositivo = {
-    nombre: req.body.nombre,
-    tipo: req.body.tipo,
-    marca: req.body.marca,
-    actualizacion: req.body.actualizacion,
-    precio: req.body.precio,
-  };
 
-  dispositivosDto.update(dispositivo, (err, data) => {
-    if (err) {
-      return res.status(400).json({
-        error: err,
-      });
-    }
-    return res.status(201).json({
-      info: data,
-    });
-  });
-};
-/**Allows to get all the dispositivos in the db */
-exports.getAll = (req, res, next) => {
-  dispositivosDto.getAll((err, data) => {
-    if (err) {
-      return res.status(400).json({
-        error: err,
-      });
-    }
+exports.updatedispositivo = async (req, res, next) => {
+  try {
+    const dispositivoData = {
+      nombre: req.body.nombre,
+      tipo: req.body.tipo,
+      marca: req.body.marca,
+      actualizacion: req.body.actualizacion,
+      precio: req.body.precio,
+    };
+
+    const dispositivoActualizado = await dispositivosDto.update(
+      { _id: req.params.id }, // Asegúrate de proporcionar el ID correcto
+      dispositivoData
+    );
     return res.status(200).json({
-      info: data,
+      info: dispositivoActualizado,
     });
-  });
-}
-
-
-/**Allows to get dispositivo filtered by marca */
-exports.getbyMarca = (req, res, next) => {
-  dispositivosDto.getbyMarca(req.params.marca, (err, data) => {
-    if (err) {
-      return res.status(400).json({
-        error: err,
-      });
-    }
-    return res.status(200).json({
-      info: data,
+  } catch (error) {
+    return res.status(400).json({
+      error: error.message,
     });
-  });
+  }
 };
-/**Allows to delete one register from the db */
-exports.deleteDispositivo = () => {
-  dispositivosDto.delete({ _nombre: req.params.nombre }, dispositivo, (err) => {
-    if (err) {
-      return res.status(400).json({
-        error: err,
-      });
-    }
+
+exports.getAll = async (req, res, next) => {
+  try {
+    const dispositivos = await dispositivosDto.getAll({});
+    return res.status(200).json({
+      info: dispositivos,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      error: error.message,
+    });
+  }
+};
+
+exports.getbyMarca = async (req, res, next) => {
+  try {
+    const dispositivos = await dispositivosDto.getByMarca({
+      marca: req.params.marca,
+    });
+    return res.status(200).json({
+      info: dispositivos,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      error: error.message,
+    });
+  }
+};
+
+exports.deleteDispositivo = async (req, res, next) => {
+  try {
+    await dispositivosDto.delete({ nombre: req.params.nombre });
     return res.status(204).json();
-  });
+  } catch (error) {
+    return res.status(400).json({
+      error: error.message,
+    });
+  }
 };
