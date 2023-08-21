@@ -80,7 +80,7 @@ exports.getbyMarca = (req, res, next) => {
   });
 };
 /**Allows to delete one register from the db */
-exports.deletePhone = () => {
+exports.deleteDispositivo = () => {
   dispositivosDto.delete({ _nombre: req.params.nombre }, dispositivo, (err) => {
     if (err) {
       return res.status(400).json({

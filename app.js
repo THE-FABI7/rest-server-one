@@ -21,6 +21,11 @@ app.get("/", (req, res) => {
   res.send("api rest of cell phones and operating systems");
 });
 
+let dispositivosRoutes = require("./routes/dispositivos.routes")
+
+dispositivosRoutes(app)
+
 app.listen(port, () => {
   console.log("listening on port " + port);
 });
+
