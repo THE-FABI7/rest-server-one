@@ -2,7 +2,6 @@
 const mongoose = require("mongoose");
 const uniqueValidator = require("mongoose-unique-validator");
 
-
 const dispostivosSchema = mongoose.Schema({
   nombre: {
     type: String,
@@ -14,10 +13,6 @@ const dispostivosSchema = mongoose.Schema({
   },
   marca: {
     type: String,
-    required: true,
-  },
-  valor: {
-    type: Number,
     required: true,
   },
   actualizacion: {
